@@ -7,27 +7,44 @@ export default function Home() {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
 
+  //criando uma função para deixar a chamada da API síncrona
+  const getUsers = async () => {
+    setLoading(true);
+
+    try {
+      const resp = await fetch("https://jsonplaceholder.typicode.com/users");
+      const json = await resp.json();
+      setUsers(json);
+    } catch (err) {
+      console.log("Deu algum erro");
+    }
+
+    setLoading(false);
+  };
+
   //etapas realizadas para a API com uso do catch e finally
   useEffect(() => {
-    console.log("Etapa 1");
-    console.log("Etapa 2");
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((response) => response.json())
-      .then((json) => {
-        console.log("Etapa 3");
-        console.log(json);
-        // setLoading(false);
-        setUsers(json);
-      })
-      .catch(() => {
-        // setLoading(false);
-        console.log("Deu algum erro");
-      })
-      .finally(() => {
-        console.log("Terminou toda a requisição");
-        setLoading(false);
-      });
-    console.log("Etapa 4");
+    // console.log("Etapa 1");
+    // console.log("Etapa 2");
+    // fetch("https://jsonplaceholder.typicode.com/users")
+    //   .then((response) => response.json())
+    //   .then((json) => {
+    //     console.log("Etapa 3");
+    //     console.log(json);
+    //     // setLoading(false);
+    //     setUsers(json);
+    //   })
+    //   .catch(() => {
+    //     // setLoading(false);
+    //     console.log("Deu algum erro");
+    //   })
+    //   .finally(() => {
+    //     console.log("Terminou toda a requisição");
+    //     setLoading(false);
+    //   });
+    // console.log("Etapa 4");
+
+    getUsers();
   }, []);
 
   return (
