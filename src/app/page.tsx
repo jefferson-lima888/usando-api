@@ -47,8 +47,26 @@ export default function Home() {
     getUsers();
   }, []);
 
+  //utilizando o método Post para adicionar um novo comentario
+  const handleAddNewPost = async () => {
+    const resp = await fetch("https://jsonplaceholder.typicode.com/posts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json; charset=UTF-8",
+      },
+      body: JSON.stringify({
+        title: "Post de teste",
+        body: "Corpo de teste",
+        userId: 99,
+      }),
+    });
+    const json = await resp.json();
+    console.log(json);
+  };
+
   return (
     <div className="container mx-auto p-5">
+      <button onClick={handleAddNewPost}>Adicionar novo post</button>
       <h1 className="text-3xl">Lista de usuários</h1>
       {loading && "Carregando..."}
       {!loading && users.length > 0 && (
