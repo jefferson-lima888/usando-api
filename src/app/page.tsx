@@ -1,5 +1,6 @@
 "use client";
 
+import { UploadImage } from "@/components/UploadImage";
 import { User } from "@/types/User";
 import { useEffect, useState } from "react";
 
@@ -79,6 +80,7 @@ export default function Home() {
         </ul>
       )}
       {!loading && users.length === 0 && "Não há usuários para exibir."}
+      <UploadImage />
     </div>
   );
 }
